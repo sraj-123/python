@@ -1,33 +1,21 @@
-import phonenumbers
-import opencage
-import folium
+class Solution:
+    def solve(self, list_maps: list[dict]):
+        hum_dict = dict()
+        for data in list_maps:
+            for key, value in data.items():
+                if hum_dict.get(value):
+                    hum_dict[value].append(key)
+                    continue
+                hum_dict[key] = [value]
+        print(hum_dict)
 
 
-from myphone import number
-
-from phonenumbers import geocoder
-
-pepnumber = phonenumbers.parse(number)
-location = geocoder.description_for_number(pepnumber, "en")
-print(location)
-
-from phonenumbers import carrier
-service_pro = phonenumbers.parse(number)
-print(carrier.name_for_number(service_pro, "en"))
-
-from opencage.geocoder import OpenCageGeocode
-
-key = "511dbafdcd5e4658b28d81c9aedfc91a"
-
-geocoder = OpenCageGeocode(key)
-query = str(location)
-results = geocoder.geocode(query)
-# print(results)
-lat = results[0]['geometry']['lat']
-lng = results[0]['geometry']['lng']
-print(lat,lng)
-
-myMap = folium.Map(location = [lat,lng], zoom_start=9)
-folium.Marker([lat, lng], popup=location).add_to(myMap)
-
-myMap.save("mylocation.html")
+Solution().solve(
+    [
+        {"Dg set": "Diesel generator"},
+        {"Organization": "Organisation"},
+        {"Group": "Organization"},
+        {"Orange": "Kinnu"},
+        {"Orange": "narangi"},
+    ]
+)
